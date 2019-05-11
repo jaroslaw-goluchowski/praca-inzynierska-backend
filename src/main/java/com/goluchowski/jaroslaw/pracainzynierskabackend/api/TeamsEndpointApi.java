@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface TeamsEndpointApi {
 
@@ -17,7 +18,7 @@ public interface TeamsEndpointApi {
 
     @ApiOperation("Get all players for specific team name")
     @GetMapping("/teams/players/{teamName}")
-    public List<Player> getAllTeamPlayers(@ApiParam(value = "Name of team") @PathVariable String teamName);
+    public Set<Player> getAllTeamPlayers(@ApiParam(value = "Name of team") @PathVariable String teamName);
 
     @ApiOperation("Get team for given name")
     @GetMapping("/teams/{teamName}")

@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class TeamsEndpoint implements TeamsEndpointApi {
@@ -26,10 +23,10 @@ public class TeamsEndpoint implements TeamsEndpointApi {
         return teamsService.findAll();
     }
 
-    public List<Player> getAllTeamPlayers(@PathVariable String teamName){
+    public Set<Player> getAllTeamPlayers(@PathVariable String teamName){
         Optional<Team> team = teamsService.getTeamByName(teamName);
         if(team.isPresent()){
-            return new ArrayList<Player>(team.get().getPlayers());
+            return team.get().getPlayers();
         }else{
             return null;
         }
