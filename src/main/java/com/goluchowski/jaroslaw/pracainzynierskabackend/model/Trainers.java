@@ -1,5 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -19,6 +19,7 @@ public class Trainers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @ApiModelProperty(example = "Artur")
@@ -33,6 +34,5 @@ public class Trainers {
 
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "date_of_birth")
-    @NotEmpty
     private Date dateOfBirth;
 }
