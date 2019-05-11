@@ -3,6 +3,7 @@ package com.goluchowski.jaroslaw.pracainzynierskabackend.controller;
 
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.TrainersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RestController
 public class TrainersEndpoint {
 
+    @Autowired
     private TrainersService trainersService;
 
     @GetMapping("/trainers")
@@ -21,7 +23,7 @@ public class TrainersEndpoint {
 
     @GetMapping("/trainers/{lastName}")
     public Trainers getByLastName(@PathVariable  String lastName){
-        Optional<Trainers> trainer = trainersService.getTrainerByLastname(lastName);
+        Optional<Trainers> trainer = trainersService.getTrainerByLastName(lastName);
         if(trainer.isPresent()){
             return trainer.get();
         }else {
