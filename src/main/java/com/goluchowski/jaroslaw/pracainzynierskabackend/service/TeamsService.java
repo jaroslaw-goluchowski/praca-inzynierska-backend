@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface TeamsService extends JpaRepository<Team, Long> {
-    public Optional<Team> findByName(String name);
+
+    public Optional<Team> getTeamByName(String name);
 }

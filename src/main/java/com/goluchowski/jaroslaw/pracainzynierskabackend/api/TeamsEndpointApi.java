@@ -18,4 +18,8 @@ public interface TeamsEndpointApi {
     @ApiOperation("Get all players for specific team name")
     @GetMapping("/teams/players/{teamName}")
     public List<Player> getAllTeamPlayers(@ApiParam(value = "Name of team") @PathVariable String teamName);
+
+    @ApiOperation("Get team for given name")
+    @GetMapping("/teams/{teamName}")
+    public Team getByName(@ApiParam(value = "Name of team") @PathVariable String teamName);
 }

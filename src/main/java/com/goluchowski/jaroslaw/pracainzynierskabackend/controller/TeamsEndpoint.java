@@ -27,9 +27,19 @@ public class TeamsEndpoint implements TeamsEndpointApi {
     }
 
     public List<Player> getAllTeamPlayers(@PathVariable String teamName){
-        Optional<Team> team = teamsService.findByName(teamName);
+        Optional<Team> team = teamsService.getTeamByName(teamName);
         if(team.isPresent()){
-            return new ArrayList<>(team.get().getPlayers());
+            return new ArrayList<Player>(team.get().getPlayers());
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public Team getByName(@PathVariable String teamName) {
+        Optional<Team> team = teamsService.getTeamByName(teamName);
+        if(team.isPresent()){
+            return team.get();
         }else{
             return null;
         }
