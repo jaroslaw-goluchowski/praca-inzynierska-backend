@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -32,6 +33,6 @@ public class Trainers {
 
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "date_of_birth")
-    @NotBlank
+    @NotEmpty
     private Date dateOfBirth;
 }
