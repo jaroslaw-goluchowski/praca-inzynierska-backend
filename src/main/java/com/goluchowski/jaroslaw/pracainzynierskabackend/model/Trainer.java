@@ -40,6 +40,7 @@ public class Trainer {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
+    @JsonIgnore
     private Team team;
 
 }
