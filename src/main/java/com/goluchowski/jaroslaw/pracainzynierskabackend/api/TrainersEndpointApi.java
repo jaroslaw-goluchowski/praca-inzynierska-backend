@@ -4,6 +4,7 @@ import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +25,10 @@ public interface TrainersEndpointApi {
 
     @ApiOperation("Add a trainer")
     @PostMapping("/trainers")
-    public void insertOrUpadteTrainer(@ApiParam(value = "Trainer object", required = true) @RequestBody Trainers trainer);
+    public ResponseEntity<String> insertOrUpadteTrainer(@ApiParam(value = "Trainer object", required = true) @RequestBody Trainers trainer);
 
     @ApiOperation("Add trainers list")
     @PostMapping("/trainers/list")
-    public void insertOrUpadteTrainerList(@ApiParam(value = "List of Trainers objects", required = true) @RequestBody List<Trainers> trainers);
+    public ResponseEntity<String> insertOrUpadteTrainerList(@ApiParam(value = "List of Trainers objects", required = true) @RequestBody List<Trainers> trainers);
 
 }

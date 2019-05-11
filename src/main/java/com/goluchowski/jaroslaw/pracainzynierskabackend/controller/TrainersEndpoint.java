@@ -6,6 +6,8 @@ import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.TrainersService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,13 +37,15 @@ public class TrainersEndpoint implements TrainersEndpointApi {
     }
 
     @PostMapping("/trainers")
-    public void insertOrUpadteTrainer(@RequestBody Trainers trainer){
+    public ResponseEntity<String> insertOrUpadteTrainer(@RequestBody Trainers trainer){
         trainersService.save(trainer);
+        return new ResponseEntity<>("Succesfully added trainer", HttpStatus.CREATED);
     }
 
     @PostMapping("/trainers/list")
-    public void insertOrUpadteTrainerList(@RequestBody List<Trainers> trainers){
+    public ResponseEntity<String> insertOrUpadteTrainerList(@RequestBody List<Trainers> trainers){
         trainersService.saveAll(trainers);
+        return new ResponseEntity<>("Succesfully added " + trainers.size() + " trainers", HttpStatus.CREATED);
     }
 
 
