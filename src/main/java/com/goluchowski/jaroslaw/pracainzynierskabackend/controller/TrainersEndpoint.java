@@ -1,8 +1,10 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.controller;
 
 
+import com.goluchowski.jaroslaw.pracainzynierskabackend.api.TrainersEndpointApi;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.TrainersService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class TrainersEndpoint {
+public class TrainersEndpoint implements TrainersEndpointApi {
 
     @Autowired
     private TrainersService trainersService;
+
 
     @GetMapping("/trainers")
     public List<Trainers> getAllTrainers(){
