@@ -1,7 +1,7 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.controller;
 
 import com.goluchowski.jaroslaw.pracainzynierskabackend.api.PlayersEndpointApi;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Players;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Player;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.PlayersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ public class PlayersEndpoint implements PlayersEndpointApi {
     private PlayersService playersService;
 
     @Override
-    public List<Players> getAllPlayers() {
+    public List<Player> getAllPlayers() {
         return playersService.findAll();
     }
 }

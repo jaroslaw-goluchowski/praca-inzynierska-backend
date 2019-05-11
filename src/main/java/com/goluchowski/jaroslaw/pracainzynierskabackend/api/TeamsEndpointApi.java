@@ -1,7 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.api;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Teams;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Team;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,5 +10,5 @@ public interface TeamsEndpointApi {
 
     @ApiOperation("Get list of teams")
     @GetMapping("/teams")
-    public List<Teams> getAllTeams();
+    public List<Team> getAllTeams();
 }

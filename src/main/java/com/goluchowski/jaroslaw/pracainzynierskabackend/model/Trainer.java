@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Trainers {
+public class Trainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +38,8 @@ public class Trainers {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Teams.class)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JsonIgnore
-    private Teams team;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private Team team;
+
 }

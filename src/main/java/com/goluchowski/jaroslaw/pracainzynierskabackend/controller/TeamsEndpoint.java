@@ -1,8 +1,7 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.controller;
 
 import com.goluchowski.jaroslaw.pracainzynierskabackend.api.TeamsEndpointApi;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.api.TrainersEndpointApi;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Teams;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Team;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.TeamsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ public class TeamsEndpoint implements TeamsEndpointApi {
     private TeamsService teamsService;
 
     @Override
-    public List<Teams> getAllTeams() {
+    public List<Team> getAllTeams() {
         return teamsService.findAll();
     }
 }

@@ -2,6 +2,9 @@ package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -9,7 +12,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-public class Players {
+@Entity
+@Table(name = "players")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
@@ -37,8 +45,9 @@ public class Players {
     @Column(name = "position")
     private String position;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Teams.class)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "team_id", nullable = false)
     @JsonIgnore
-    private Teams team;
+    private Team team;
+
 }

@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Teams {
+public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +40,10 @@ public class Teams {
     @Column(name = "creation_date")
     private Date creationDate;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Trainers.class, mappedBy = "teams")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Trainers trainer;
+    @OneToOne(mappedBy = "team")
+    private Trainer trainer;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Players.class, mappedBy = "teams", cascade = CascadeType.REMOVE)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private List<Players> players;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Player> players;
+
 }

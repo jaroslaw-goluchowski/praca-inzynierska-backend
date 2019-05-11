@@ -1,14 +1,14 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.service;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainers;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface TrainersService extends JpaRepository<Trainers, Long> {
+public interface TrainersService extends JpaRepository<Trainer, Long> {
 
-    public Optional<Trainers> getTrainerByLastName(String lastName);
+    public Optional<Trainer> getTrainerByLastName(String lastName);
 
 }
