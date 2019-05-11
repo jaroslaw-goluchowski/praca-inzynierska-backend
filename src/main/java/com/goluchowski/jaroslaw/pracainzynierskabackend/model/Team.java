@@ -45,7 +45,7 @@ public class Team {
     private Trainer trainer;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnore
     private Set<Player> players;
 
 }

@@ -49,7 +49,6 @@ public class Player {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "team_id", nullable = false)
     @JsonIgnore
-    @JsonBackReference
     private Team team;
 
 }
