@@ -2,9 +2,6 @@ package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,13 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Entity
-@Table(name = "trainers")
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Trainers {
-
+public class Players {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
@@ -37,6 +28,14 @@ public class Trainers {
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
+    @ApiModelProperty(example = "1.82")
+    @Column(name = "height")
+    private float height;
+
+    @ApiModelProperty(example = "Srodkowy")
+    @Column(name = "position")
+    private String position;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Teams.class)
     @OnDelete(action = OnDeleteAction.NO_ACTION)

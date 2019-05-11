@@ -11,35 +11,40 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity
-@Table(name = "trainers")
+@Table(name = "teams")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Trainers {
+public class Teams {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
 
-    @ApiModelProperty(example = "Artur")
-    @Column(name = "first_name", length = 20)
+    @ApiModelProperty(example = "Skra Belchatow")
+    @Column(name = "name", length = 40)
     @NotBlank
-    private String firstName;
+    private String name;
 
-    @ApiModelProperty(example = "Nowak")
-    @Column(name = "last_name", length = 30)
+    @ApiModelProperty(example = "Krakow")
+    @Column(name = "city", length = 30)
     @NotBlank
-    private String lastName;
+    private String city;
 
     @ApiModelProperty(example = "1996-09-06")
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    @Column(name = "creation_date")
+    private Date creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Teams.class)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Trainers.class, mappedBy = "teams")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JsonIgnore
-    private Teams team;
+    private Trainers trainer;
+
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Players.class, mappedBy = "teams", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private List<Players> players;
 }
