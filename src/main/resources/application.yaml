@@ -3,12 +3,12 @@ server:
 
 spring:
   datasource:
-#    url: jdbc:postgresql://ec2-54-228-252-67.eu-west-1.compute.amazonaws.com:5432/ddaav7km95rcs7
-#    username: crvwvctiwohefu
-#    password: 047d55a63a39ebee9a868f5d52ad6ac4c5e1216e4b1d3f79c18674704389121d
-    url: jdbc:postgresql://localhost:5432/myDB
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ec2-54-228-252-67.eu-west-1.compute.amazonaws.com:5432/ddaav7km95rcs7
+    username: crvwvctiwohefu
+    password: 047d55a63a39ebee9a868f5d52ad6ac4c5e1216e4b1d3f79c18674704389121d
+#    url: jdbc:postgresql://localhost:5432/myDB
+#    username: postgres
+#    password: postgres
   jpa:
     properties:
       hibernate:
