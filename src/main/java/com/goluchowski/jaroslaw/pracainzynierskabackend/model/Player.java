@@ -46,7 +46,7 @@ public class Player {
 
     @ApiModelProperty(example = "1.82")
     @Column(name = "height", precision = 3, scale = 2)
-    @NotBlank(message = "Height is mandatory")
+    @NotNull(message = "Height is mandatory")
     private float height;
 
     @ApiModelProperty(example = "Srodkowy")
