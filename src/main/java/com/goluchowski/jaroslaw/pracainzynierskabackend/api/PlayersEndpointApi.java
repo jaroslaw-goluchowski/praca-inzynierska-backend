@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface PlayersEndpointApi {
-//
-//    @ApiOperation("Get list of players")
-//    @GetMapping("/players")
-//    public List<Player> getAllPlayers();
-//
-//
-//    @ApiOperation("Insert player to database")
-//    @PostMapping("/players/{teamName}")
-//    public ResponseEntity<String> addPlayer(@ApiParam(value = "Name of team")@PathVariable String teamName,
-//                                            @ApiParam(value = "Player info") @RequestBody Player player);
+
+    @ApiOperation("Get list of players")
+    @GetMapping("/players")
+    public List<Player> getAllPlayers();
+
+
+    @ApiOperation("Insert player to database")
+    @PostMapping("/players/{teamName}")
+    public ResponseEntity<String> addPlayer(@NotNull @ApiParam(value = "Name of team")@PathVariable String teamName,
+                                            @ApiParam(value = "Player info") @RequestBody Player player);
 //
 //    @ApiOperation("Insert players to database")
 //    @PostMapping("/players/list/{teamName}")

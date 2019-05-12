@@ -1,8 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import lombok.*;
 
 import javax.persistence.*;

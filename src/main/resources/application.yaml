@@ -19,3 +19,11 @@ spring:
       ddl-auto: update
   jackson:
     date-format: yyyy-MM-dd
+
+logging:
+  level:
+    io:
+      swagger:
+        models:
+          parameters:
+            AbstractSerializableParameter : ERROR
