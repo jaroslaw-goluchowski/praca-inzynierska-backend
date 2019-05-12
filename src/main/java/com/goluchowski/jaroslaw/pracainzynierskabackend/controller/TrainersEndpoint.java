@@ -5,13 +5,14 @@ import com.goluchowski.jaroslaw.pracainzynierskabackend.api.TrainersEndpointApi;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainer;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.TrainersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
 public class TrainersEndpoint implements TrainersEndpointApi {
@@ -19,36 +20,38 @@ public class TrainersEndpoint implements TrainersEndpointApi {
     @Autowired
     private TrainersService trainersService;
 
-
-    @GetMapping("/trainers")
-    public List<Trainer> getAllTrainers(){
+    @Override
+    public List<Trainer> getAllTrainers() {
         return trainersService.findAll();
     }
 
-    @GetMapping("/trainers/{lastName}")
-    public Trainer getByLastName(@Valid @PathVariable  String lastName){
-        Optional<Trainer> trainer = trainersService.getTrainerByLastName(lastName);
-        if(trainer.isPresent()){
-            return trainer.get();
-        }else {
-            return null;
+    @Override
+    public ResponseEntity<String> insertTrainer(@Valid @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestBody Trainer trainer) {
+        Optional<Trainer> optional = trainersService.findByFirstNameAndLastNameAndDateOfBirth(trainer.getFirstName(),
+                trainer.getLastName(), trainer.getDateOfBirth());
+
+        if(optional.isPresent()){
+            return ResponseEntity.badRequest().body("Trainer already in db");
         }
-    }
 
-    @PostMapping("/trainers")
-    public ResponseEntity<String> insertOrUpadteTrainer(@Valid @RequestBody Trainer trainer){
         trainersService.save(trainer);
-        return new ResponseEntity<>("Succesfully added trainer", HttpStatus.CREATED);
+        return new ResponseEntity<>("Trainer added", HttpStatus.CREATED);
     }
 
-    @PostMapping("/trainers/list")
-    public ResponseEntity<String> insertOrUpadteTrainerList(@Valid @RequestBody List<Trainer> trainers){
+    @Override
+    public ResponseEntity<String> insertTrainerList(List<Trainer> trainers) {
+        AtomicBoolean exists = new AtomicBoolean(false);
+        trainers.forEach(t -> {
+            Optional<Trainer> optional = trainersService.findByFirstNameAndLastNameAndDateOfBirth(t.getFirstName(),
+                    t.getLastName(), t.getDateOfBirth());
+            if(optional.isPresent()){
+                exists.set(true);
+            }
+        });
+        if(exists.get()){
+            return ResponseEntity.badRequest().body("Trainer already in db");
+        }
         trainersService.saveAll(trainers);
-        return new ResponseEntity<>("Succesfully added " + trainers.size() + " trainers", HttpStatus.CREATED);
+        return new ResponseEntity<>(trainers.size() + " trainers added ", HttpStatus.CREATED);
     }
-
-
-
-
-
 }

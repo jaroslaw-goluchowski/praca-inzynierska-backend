@@ -1,13 +1,16 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -21,25 +24,27 @@ public class Trainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @ApiModelProperty(example = "Artur")
     @Column(name = "first_name", length = 20)
-    @NotBlank
+    @NotBlank(message = "Name is mandatory")
     private String firstName;
 
     @ApiModelProperty(example = "Nowak")
     @Column(name = "last_name", length = 30)
-    @NotBlank
+    @NotBlank(message = "Name is mandatory")
     private String lastName;
 
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "date_of_birth")
+    @NotNull(message = "Date is mandatory")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = true, name = "team_id")
     @JsonIgnore
     private Team team;
 

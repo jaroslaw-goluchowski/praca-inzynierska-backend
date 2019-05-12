@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface TeamsService extends JpaRepository<Team, Long> {
 
     public Optional<Team> getTeamByName(String name);
+    public boolean existsByName(String name);
 }
