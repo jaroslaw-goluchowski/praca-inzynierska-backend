@@ -45,9 +45,8 @@ public class Player {
     private Date dateOfBirth;
 
     @ApiModelProperty(example = "1.82")
-    @Column(name = "height")
+    @Column(name = "height", precision = 3, scale = 2)
     @NotBlank(message = "Height is mandatory")
-    @Size(min = 3, max = 3,message = "Height must be 3 digits")
     private float height;
 
     @ApiModelProperty(example = "Srodkowy")
