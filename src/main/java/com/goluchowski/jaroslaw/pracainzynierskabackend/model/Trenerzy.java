@@ -10,38 +10,39 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "trainers")
+@Table(name = "trenerzy")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Trainer {
+public class Trenerzy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "trener_id")
     @ApiModelProperty(hidden = true)
     private Long id;
 
     @ApiModelProperty(example = "Artur")
-    @Column(name = "first_name", length = 20)
+    @Column(name = "imie", length = 20)
     @NotBlank(message = "Name is mandatory")
-    private String firstName;
+    private String imie;
 
     @ApiModelProperty(example = "Nowak")
-    @Column(name = "last_name", length = 30)
+    @Column(name = "nazwisko", length = 30)
     @NotBlank(message = "Name is mandatory")
-    private String lastName;
+    private String nazwisko;
 
     @ApiModelProperty(example = "1996-09-06")
-    @Column(name = "date_of_birth")
+    @Column(name = "data_urodzenia")
     @NotNull(message = "Date is mandatory")
     @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
+    private Date data_urodzenia;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(unique = true, name = "team_id")
-    @JsonIgnore
-    private Team team;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(unique = true, name = "team_id")
+//    @JsonIgnore
+//    private Druzyny druzyny;
 
 }

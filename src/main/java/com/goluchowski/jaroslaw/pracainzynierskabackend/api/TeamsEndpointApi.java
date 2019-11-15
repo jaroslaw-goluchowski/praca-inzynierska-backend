@@ -1,7 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.api;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Player;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Team;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Druzyny;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Set;
 
 public interface TeamsEndpointApi {
 
     @ApiOperation("Get list of teams")
     @GetMapping("/teams")
-    public List<Team> getAllTeams();
+    public List<Druzyny> getAllTeams();
 //
 //    @ApiOperation("Get all players for specific team name")
 //    @GetMapping("/teams/players/{teamName}")
@@ -31,7 +29,7 @@ public interface TeamsEndpointApi {
     @ApiOperation("Add team to database")
     @PostMapping("/teams/{trainerId}")
     public ResponseEntity<String> addTeam(@ApiParam(value = "Trainer ID") @NotNull(message = "Enter trainerID") @PathVariable Long trainerId,
-                                          @ApiParam(value = "Team info") @RequestBody Team team);
+                                          @ApiParam(value = "Team info") @RequestBody Druzyny druzyny);
 //
 //    @ApiOperation("Add list of teams to database")
 //    @PostMapping("/teams/list/{trainerId}")

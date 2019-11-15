@@ -1,6 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.api;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Player;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Siatkarze;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,13 @@ public interface PlayersEndpointApi {
 
     @ApiOperation("Get list of players")
     @GetMapping("/players")
-    public List<Player> getAllPlayers();
+    public List<Siatkarze> getAllPlayers();
 
 
     @ApiOperation("Insert player to database")
     @PostMapping("/players/{teamName}")
     public ResponseEntity<String> addPlayer(@NotNull @ApiParam(value = "Name of team")@PathVariable String teamName,
-                                            @ApiParam(value = "Player info") @RequestBody Player player);
+                                            @ApiParam(value = "Player info") @RequestBody Siatkarze siatkarze);
 //
 //    @ApiOperation("Insert players to database")
 //    @PostMapping("/players/list/{teamName}")

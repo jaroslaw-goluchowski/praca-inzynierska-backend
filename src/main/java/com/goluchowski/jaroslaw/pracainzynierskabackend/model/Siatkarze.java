@@ -1,62 +1,56 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "players")
+@Table(name = "siatkarze")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Player {
+public class Siatkarze {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "siatkarz_id")
     @ApiModelProperty(hidden = true)
     private Long id;
 
     @ApiModelProperty(example = "Artur")
-    @Column(name = "first_name", length = 20)
+    @Column(name = "imie", length = 20)
     @NotBlank(message = "Name is mandatory")
-    private String firstName;
+    private String imie;
 
     @ApiModelProperty(example = "Nowak")
-    @Column(name = "last_name", length = 30)
+    @Column(name = "nazwisko", length = 30)
     @NotBlank(message = "Name is mandatory")
-    private String lastName;
+    private String nazwisko;
 
     @ApiModelProperty(example = "1996-09-06")
-    @Column(name = "date_of_birth")
+    @Column(name = "data_urodzenia")
     @NotNull(message = "Date is mandatory")
     @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
+    private Date data_urodzenia;
 
     @ApiModelProperty(example = "1.82")
-    @Column(name = "height", precision = 3, scale = 2)
+    @Column(name = "wzrost", precision = 3, scale = 2)
     @NotNull(message = "Height is mandatory")
-    private float height;
+    private float wzrost;
 
     @ApiModelProperty(example = "Srodkowy")
-    @Column(name = "position")
+    @Column(name = "pozycja")
     @NotBlank(message = "Position is mandatory")
-    private String position;
+    private String pozycja;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "team_id", nullable = false)
+    @ManyToOne(targetEntity = Druzyny.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Team team;
+    private Druzyny druzyna;
 
 }

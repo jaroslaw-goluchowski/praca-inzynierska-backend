@@ -11,41 +11,35 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "teams")
+@Table(name = "druzyny")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Team {
+public class Druzyny {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "druzyna_id")
     @ApiModelProperty(hidden = true)
     private Long id;
 
     @ApiModelProperty(example = "Skra Belchatow")
-    @Column(name = "name", length = 40)
+    @Column(name = "nazwa", length = 40)
     @NotBlank(message = "Name is mandatory")
-    private String name;
-
-    @ApiModelProperty(example = "Krakow")
-    @Column(name = "city", length = 30)
-    @NotBlank(message = "City is mandatory")
-    private String city;
+    private String nazwa;
 
     @ApiModelProperty(example = "1996-09-06")
-    @Column(name = "creation_date")
+    @Column(name = "data_zalozenia")
     @NotNull(message = "Date is mandatory")
     @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    private Date data_zalozenia;
 
-    @OneToOne(mappedBy = "team")
+    @OneToOne(targetEntity = Miasta.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Miasta miasto;
+
+    @OneToOne(targetEntity = Trenerzy.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ApiModelProperty(hidden = true)
-    private Trainer trainer;
-
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @ApiModelProperty(hidden = true)
-    private Set<Player> players;
-
+    private Trenerzy trener;
 }

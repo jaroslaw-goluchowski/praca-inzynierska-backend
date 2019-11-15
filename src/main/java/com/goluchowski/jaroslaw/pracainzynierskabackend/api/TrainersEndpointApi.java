@@ -1,6 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.api;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trainer;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Trenerzy;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,17 +17,17 @@ public interface TrainersEndpointApi {
 
     @ApiOperation("Get list of trainers")
     @GetMapping("/trainers")
-    public List<Trainer> getAllTrainers();
+    public List<Trenerzy> getAllTrainers();
 
 
     @ApiOperation("Add a trainer")
     @PostMapping("/trainers")
     public ResponseEntity<String> insertTrainer(@ApiParam(value = "Trainer object", required = true)
-                                                    @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Trainer trainer);
+                                                    @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Trenerzy trenerzy);
 
     @ApiOperation("Add trainers list")
     @PostMapping("/trainers/list")
     public ResponseEntity<String> insertTrainerList(@ApiParam(value = "List of Trainers objects", required = true)
-                                                                @RequestBody List<Trainer> trainers);
+                                                                @RequestBody List<Trenerzy> trenerzies);
 
 }
