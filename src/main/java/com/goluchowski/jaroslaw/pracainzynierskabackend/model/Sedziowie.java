@@ -1,5 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -21,7 +22,8 @@ public class Sedziowie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sedzia_id")
     @ApiModelProperty(hidden = true)
-    private Long id;
+    @JsonIgnore
+    private Long sedzia_id;
 
     @ApiModelProperty(example = "Artur")
     @Column(name = "imie", length = 20)
@@ -36,7 +38,6 @@ public class Sedziowie {
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "data_urodzenia")
     @NotNull(message = "Date is mandatory")
-    @Temporal(TemporalType.DATE)
-    private Date data_urodzenia;
+    private Long data_urodzenia;
 
 }

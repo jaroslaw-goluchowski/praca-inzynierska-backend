@@ -21,7 +21,8 @@ public class Siatkarze {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "siatkarz_id")
     @ApiModelProperty(hidden = true)
-    private Long id;
+    @JsonIgnore
+    private Long siatkarz_id;
 
     @ApiModelProperty(example = "Artur")
     @Column(name = "imie", length = 20)
@@ -36,8 +37,7 @@ public class Siatkarze {
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "data_urodzenia")
     @NotNull(message = "Date is mandatory")
-    @Temporal(TemporalType.DATE)
-    private Date data_urodzenia;
+    private Long data_urodzenia;
 
     @ApiModelProperty(example = "1.82")
     @Column(name = "wzrost", precision = 3, scale = 2)
@@ -50,6 +50,7 @@ public class Siatkarze {
     private String pozycja;
 
     @ManyToOne(targetEntity = Druzyny.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "druzyna_id")
     @JsonIgnore
     private Druzyny druzyna;
 

@@ -1,13 +1,12 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.Set;
 
 
 @Entity
@@ -23,7 +22,8 @@ public class Druzyny {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "druzyna_id")
     @ApiModelProperty(hidden = true)
-    private Long id;
+    @JsonIgnore
+    private Long druzyna_id;
 
     @ApiModelProperty(example = "Skra Belchatow")
     @Column(name = "nazwa", length = 40)
@@ -33,8 +33,17 @@ public class Druzyny {
     @ApiModelProperty(example = "1996-09-06")
     @Column(name = "data_zalozenia")
     @NotNull(message = "Date is mandatory")
-    @Temporal(TemporalType.DATE)
-    private Date data_zalozenia;
+    private Long data_zalozenia;
+
+    @Column(name = "zdjecie_druzynowe")
+    @Lob
+    @JsonIgnore
+    private byte[] zdjecie_druzynowe;
+
+    @Column(name = "logo")
+    @Lob
+    @JsonIgnore
+    private byte[] logo;
 
     @OneToOne(targetEntity = Miasta.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Miasta miasto;
