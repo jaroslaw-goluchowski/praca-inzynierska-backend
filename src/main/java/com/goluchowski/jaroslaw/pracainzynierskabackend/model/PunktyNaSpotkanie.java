@@ -1,6 +1,5 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -19,7 +18,7 @@ public class PunktyNaSpotkanie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "punkty_id")
     @ApiModelProperty(hidden = true)
-    @JsonIgnore
+//    @JsonIgnore
     private Long punkty_id;
 
     @ManyToOne(targetEntity = Spotkania.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)

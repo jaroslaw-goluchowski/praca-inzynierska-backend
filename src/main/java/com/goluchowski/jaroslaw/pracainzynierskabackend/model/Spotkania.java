@@ -1,13 +1,11 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 @Table(name = "spotkania")
@@ -22,7 +20,7 @@ public class Spotkania {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "spotkanie_id")
     @ApiModelProperty(hidden = true)
-    @JsonIgnore
+//    @JsonIgnore
     private Long spotkanie_id;
 
     @ApiModelProperty(example = "1996-09-06")

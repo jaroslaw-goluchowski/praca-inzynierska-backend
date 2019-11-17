@@ -10,8 +10,10 @@ import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.SpotkanieDetai
 import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.Tabela;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +85,6 @@ public class DefaultService {
     public List<SpotkaniaInfo> wyswietlSpotkania() {
         List<Spotkania> wszystkieSpotkania = spotkaniaRepository.findAll();
         List<SpotkaniaInfo> response = new ArrayList<>();
-        List<SpotkanieDetails> spotkanieDetails = new ArrayList<>();
         wszystkieSpotkania.forEach(spotkanie -> {
             SpotkaniaInfo spotkaniaInfo = new SpotkaniaInfo();
             spotkaniaInfo.setData_spotkania(spotkanie.getData());
@@ -94,19 +95,38 @@ public class DefaultService {
             spotkaniaInfo.setNazwa_gospodarza(spotkanie.getGospodarz().getNazwa());
             spotkaniaInfo.setSety_goscie(spotkanie.getSety_goscie());
             spotkaniaInfo.setSety_gospodarze(spotkanie.getSety_gospodarze());
-            List<PunktyNaSpotkanie> allBySpotkanie = punktyNaSpotkanieRepository.findAllBySpotkanie(spotkanie);
-            allBySpotkanie.forEach(p -> {
-                SpotkanieDetails details = new SpotkanieDetails();
-                details.setImie_siatkarza(p.getSiatkarz().getImie());
-                details.setNazwisko_siatkarza(p.getSiatkarz().getNazwisko());
-                details.setNazwa_druzyny(p.getSiatkarz().getDruzyna().getNazwa());
-                details.setPunkty(p.getPunkty());
-                spotkanieDetails.add(details);
-            });
-            spotkaniaInfo.setSzczegoly(spotkanieDetails);
+            spotkaniaInfo.setSzczegoly(getDetailsDlaSpotkania(spotkanie.getSpotkanie_id()));
             response.add(spotkaniaInfo);
         });
         return response;
+    }
+
+    @Transactional
+    private List<SpotkanieDetails> getDetailsDlaSpotkania(Long spotkanieId) {
+        List<SpotkanieDetails> spotkanieDetails = new ArrayList<>();
+        List<PunktyNaSpotkanie> all = punktyNaSpotkanieRepository.findAllBySpotkanie(spotkanieId);
+        all.forEach(punktyNaSpotkanie -> {
+            SpotkanieDetails details = new SpotkanieDetails();
+            details.setImie_siatkarza(punktyNaSpotkanie.getSiatkarz().getImie());
+            details.setNazwisko_siatkarza(punktyNaSpotkanie.getSiatkarz().getNazwisko());
+            details.setPunkty(punktyNaSpotkanie.getPunkty());
+            details.setNazwa_druzyny(punktyNaSpotkanie.getSiatkarz().getDruzyna().getNazwa());
+            spotkanieDetails.add(details);
+        });
+        return spotkanieDetails;
+    }
+
+    @Transactional
+    public void uploadFile(MultipartFile zdjecie,MultipartFile logo,String nazwa, Long data,
+                           Long miastoId, Long trenerId ) throws IOException {
+        Druzyny druzyna = new Druzyny();
+        druzyna.setNazwa(nazwa);
+        druzyna.setData_zalozenia(data);
+        druzyna.setLogo(logo.getBytes());
+        druzyna.setZdjecie_druzynowe(zdjecie.getBytes());
+        druzyna.setMiasto(miastaRepository.getOne(miastoId));
+        druzyna.setTrener(trenerzyRepository.getOne(trenerId));
+        druzynyRepository.save(druzyna);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.responses;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Siatkarze;
 
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Siatkarze;
 import lombok.Data;
 
 import java.util.List;
