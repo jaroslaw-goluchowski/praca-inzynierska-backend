@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show message</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Result</h1>
+
+<p th:text="'Imie: ' + ${trener.imie}"></p>
+<p th:text="'Nazwisko: ' + ${trener.nazwisko}"></p>
+<p th:text="'Data urodzenia: ' + ${trener.data_urodzenia}"></p>
+<a href="/addTrainer">Submit another message</a>
+
+</body>
+</html>

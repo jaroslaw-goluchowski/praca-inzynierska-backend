@@ -1,7 +1,14 @@
 server:
   port: 8060
+  error:
+    path: /error2
 
 spring:
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
   servlet:
     multipart:
       enabled: true
