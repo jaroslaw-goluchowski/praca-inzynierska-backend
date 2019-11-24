@@ -1,6 +1,5 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Siatkarze;
 import lombok.Data;
 
@@ -13,7 +12,6 @@ public class DruzynyInfo {
 
     private Long data_zalozenia;
 
-    @JsonIgnore
     private byte[] zdjecie_druzynowe;
 
     private byte[] logo;
