@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+
 @Controller
 public class HtmlController {
 
@@ -44,11 +46,12 @@ public class HtmlController {
 
     @PostMapping("/admin/addTeam")
     public String processTeamForm(@ModelAttribute("druzyna") Druzyny druzyna,
-                                  @ModelAttribute("reszta") TrenerMiastoString reszta) {
+                                  @ModelAttribute("reszta") TrenerMiastoString reszta) throws IOException {
         Trenerzy trenerzy = trenerzyRepository.findByNazwisko(reszta.getNazwiskoTrenera());
         Miasta miasta = miastaRepository.findByNazwa(reszta.getNazwaMiasta());
         druzyna.setTrener(trenerzy);
         druzyna.setMiasto(miasta);
+        druzyna.setLogo(reszta.getLogo().getBytes());
         druzynyRepository.save(druzyna);
         return "/admin/showMessageTeam";
     }

@@ -11,7 +11,7 @@
             <input type="submit" value="Sign Out"/>
         </form>
 
-        <form action="#" th:action="@{/admin/addTeam}" th:object="${druzyna}" method="post">
+        <form action="#" th:action="@{/admin/addTeam}" th:object="${druzyna}" method="post" enctype="multipart/form-data">
             <div th:object="${reszta}" >
             <p>
                 Nazwa druzyny: <input type="text" th:field="${druzyna.nazwa}">
@@ -20,7 +20,7 @@
                 Data zalożenia (timestamp): <input type="text" th:field="${druzyna.data_zalozenia}">
             </p>
             <p>
-                Logo : <input type="file" th:field="${druzyna.logo}">
+                Logo : <input type="file" th:field="${reszta.logo}">
             </p>
             <p>
                 Nazwa miasta : <input type="text" th:field="${reszta.nazwaMiasta}">
