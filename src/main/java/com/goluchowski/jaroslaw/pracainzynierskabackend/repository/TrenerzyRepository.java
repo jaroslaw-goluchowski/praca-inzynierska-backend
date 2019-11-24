@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TrenerzyRepository extends JpaRepository<Trenerzy, Long> {
+    Trenerzy findByNazwisko(String nazwisko);
 }

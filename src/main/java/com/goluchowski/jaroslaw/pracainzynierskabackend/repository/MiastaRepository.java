@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MiastaRepository extends JpaRepository<Miasta, Long> {
+    Miasta findByNazwa(String nazwa);
 }

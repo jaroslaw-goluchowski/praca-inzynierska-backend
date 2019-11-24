@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adding teams</title>
+</head>
+<body>
+        <h1>Adding teams page (Spring Security protected)</h1>
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+        <form action="#" th:action="@{/admin/addTeam}" th:object="${druzyna}" method="post">
+            <div th:object="${reszta}" >
+            <p>
+                Nazwa druzyny: <input type="text" th:field="${druzyna.nazwa}">
+            </p>
+            <p>
+                Data zalożenia (timestamp): <input type="text" th:field="${druzyna.data_zalozenia}">
+            </p>
+            <p>
+                Logo : <input type="file" th:field="${druzyna.logo}">
+            </p>
+            <p>
+                Nazwa miasta : <input type="text" th:field="${reszta.nazwaMiasta}">
+            </p>
+            <p>
+                Nazwisko trenera : <input type="text" th:field="${reszta.nazwiskoTrenera}">
+            </p>
+            <p>
+                <input type="submit" value="Submit"/> <input type="reset" value="Reset">
+            </p>
+                </div>
+        </form>
+</body>
+</html>
