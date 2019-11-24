@@ -21,22 +21,22 @@ public class DefaultControler {
     @Autowired
     private DefaultService service;
 
-    @GetMapping("/getDruzynyPlusZawodnicy")
+    @GetMapping("/v1/getDruzynyPlusZawodnicy")
     public ResponseEntity<List<DruzynyInfo>> wyswietlWszystkieDruzynyISiatkarzy() {
         return ResponseEntity.ok().body(service.wyswietlDruzyny());
     }
 
-    @GetMapping("/getTabela")
+    @GetMapping("/v1/getTabela")
     public ResponseEntity<List<Tabela>> wyswietlTabele() {
         return ResponseEntity.ok().body(service.wyswietlTabele());
     }
 
-    @GetMapping("/getSpotkania")
+    @GetMapping("/v1/getSpotkania")
     public ResponseEntity<List<SpotkaniaInfo>> wyswietlSpotkania() {
         return ResponseEntity.ok().body(service.wyswietlSpotkania());
     }
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/v1/uploadFile")
     public void uploadFile(@RequestParam("zdjecie") MultipartFile zdjecie, @RequestParam("logo") MultipartFile logo, @RequestParam String nazwa,
                            @RequestParam Long data, @RequestParam Long miastoId, @RequestParam Long trenerId ) throws IOException {
         service.uploadFile(zdjecie, logo, nazwa, data, miastoId, trenerId);
