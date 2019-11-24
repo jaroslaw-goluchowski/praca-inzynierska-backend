@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -46,12 +48,13 @@ public class HtmlController {
 
     @PostMapping("/admin/addTeam")
     public String processTeamForm(@ModelAttribute("druzyna") Druzyny druzyna,
-                                  @ModelAttribute("reszta") TrenerMiastoString reszta) throws IOException {
+                                  @ModelAttribute("reszta") TrenerMiastoString reszta,
+                                    @RequestParam("file") MultipartFile file) throws IOException {
         Trenerzy trenerzy = trenerzyRepository.findByNazwisko(reszta.getNazwiskoTrenera());
         Miasta miasta = miastaRepository.findByNazwa(reszta.getNazwaMiasta());
         druzyna.setTrener(trenerzy);
         druzyna.setMiasto(miasta);
-        druzyna.setLogo(reszta.getLogo().getBytes());
+        druzyna.setLogo(file.getBytes());
         druzynyRepository.save(druzyna);
         return "/admin/showMessageTeam";
     }
