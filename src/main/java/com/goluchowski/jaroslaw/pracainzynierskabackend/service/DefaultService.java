@@ -2,12 +2,10 @@ package com.goluchowski.jaroslaw.pracainzynierskabackend.service;
 
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Druzyny;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.PunktyNaSpotkanie;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Sezony;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.model.Spotkania;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.repository.*;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.DruzynyInfo;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.SpotkaniaInfo;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.SpotkanieDetails;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.Tabela;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +34,9 @@ public class DefaultService {
     private MiastaRepository miastaRepository;
 
     @Autowired
+    private SezonyRepository sezonyRepository;
+
+    @Autowired
     private PunktyNaSpotkanieRepository punktyNaSpotkanieRepository;
 
     @Transactional
@@ -59,16 +60,29 @@ public class DefaultService {
     }
 
     @Transactional
-    public List<Tabela> wyswietlTabele() {
-        List<Druzyny> wszystkieDruzyny = druzynyRepository.findAll();
-        List<Tabela> response = new ArrayList<>();
+    public List<TabelaPerSezon> wyswietlTabele() {
+        List<TabelaPerSezon> response = new ArrayList<>();
+        List<Sezony> sezonyList = sezonyRepository.findAll();
 
+        sezonyList.forEach(sezon -> {
+            TabelaPerSezon tabelaPerSezon = new TabelaPerSezon();
+            tabelaPerSezon.setNazwaSezonu(sezon.getNazwaSezonu());
+            tabelaPerSezon.setTabela(getTabelaForSezon(sezon));
+            response.add(tabelaPerSezon);
+        });
+
+        return response;
+    }
+
+    private List<Tabela> getTabelaForSezon(Sezony sezon) {
+        List<Tabela> response = new ArrayList<>();
+        List<Druzyny> wszystkieDruzyny = druzynyRepository.findAll();
         wszystkieDruzyny.forEach(druzyna -> {
             Tabela tabela = new Tabela();
             int wygrane_gospodarz = 0;
             int wygrane_gosc = 0;
             tabela.setNazwa_druzyny(druzyna.getNazwa());
-            List<Spotkania> wszystkieSpotkaniaDruzyny = spotkaniaRepository.findAllByGoscOrGospodarz(druzyna, druzyna);
+            List<Spotkania> wszystkieSpotkaniaDruzyny = spotkaniaRepository.findAllByGoscOrGospodarzAndSezon(druzyna.getDruzyna_id(), druzyna.getDruzyna_id(), sezon.getSezon_id());
             tabela.setMecze_rozegrane(wszystkieSpotkaniaDruzyny.size());
             wygrane_gospodarz = (int) wszystkieSpotkaniaDruzyny.stream().filter(spotkanie -> spotkanie.getGospodarz() == druzyna && spotkanie.getSety_gospodarze() > spotkanie.getSety_goscie()).count();
             wygrane_gosc = (int) wszystkieSpotkaniaDruzyny.stream().filter(spotkanie -> spotkanie.getGosc() == druzyna && spotkanie.getSety_goscie() > spotkanie.getSety_gospodarze()).count();
@@ -82,10 +96,21 @@ public class DefaultService {
     }
 
     @Transactional
-    public List<SpotkaniaInfo> wyswietlSpotkania() {
-        List<Spotkania> wszystkieSpotkania = spotkaniaRepository.findAll();
+    public List<SezonyInfo> wyswietlSpotkania() {
+        List<Sezony> all = sezonyRepository.findAll();
+        List<SezonyInfo> response = new ArrayList<>();
+        all.forEach(sezon -> {
+            SezonyInfo sezonyInfo = new SezonyInfo();
+            sezonyInfo.setSezonNazwa(sezon.getNazwaSezonu());
+            sezonyInfo.setSpotkania(getSpotkaniaInfoForSezon(sezon));
+            response.add(sezonyInfo);
+        });
+        return response;
+    }
+
+    private List<SpotkaniaInfo> getSpotkaniaInfoForSezon(Sezony sezon) {
         List<SpotkaniaInfo> response = new ArrayList<>();
-        wszystkieSpotkania.forEach(spotkanie -> {
+        sezon.getSpotkania().forEach(spotkanie -> {
             SpotkaniaInfo spotkaniaInfo = new SpotkaniaInfo();
             spotkaniaInfo.setData_spotkania(spotkanie.getData());
             spotkaniaInfo.setNazwa_miasta(spotkanie.getMiasto_spotkania().getNazwa());
@@ -100,6 +125,7 @@ public class DefaultService {
         });
         return response;
     }
+
 
     @Transactional
     private List<SpotkanieDetails> getDetailsDlaSpotkania(Long spotkanieId) {

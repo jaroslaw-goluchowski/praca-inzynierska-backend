@@ -1,5 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -53,5 +54,10 @@ public class Spotkania {
     @ManyToOne(targetEntity = Miasta.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "miasto_id")
     private Miasta miasto_spotkania;
+
+    @ManyToOne(targetEntity = Sezony.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "sezon_id")
+    @JsonIgnore
+    private Sezony sezon;
 
 }

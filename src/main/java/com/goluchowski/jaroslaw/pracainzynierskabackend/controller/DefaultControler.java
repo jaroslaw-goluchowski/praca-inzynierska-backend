@@ -1,8 +1,6 @@
 package com.goluchowski.jaroslaw.pracainzynierskabackend.controller;
 
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.DruzynyInfo;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.SpotkaniaInfo;
-import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.Tabela;
+import com.goluchowski.jaroslaw.pracainzynierskabackend.responses.*;
 import com.goluchowski.jaroslaw.pracainzynierskabackend.service.DefaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +24,13 @@ public class DefaultControler {
         return ResponseEntity.ok().body(service.wyswietlDruzyny());
     }
 
-    @GetMapping("/v1/getTabela")
-    public ResponseEntity<List<Tabela>> wyswietlTabele() {
+    @GetMapping("/v1/getTabelaNaSezony")
+    public ResponseEntity<List<TabelaPerSezon>> wyswietlTabele() {
         return ResponseEntity.ok().body(service.wyswietlTabele());
     }
 
-    @GetMapping("/v1/getSpotkania")
-    public ResponseEntity<List<SpotkaniaInfo>> wyswietlSpotkania() {
+    @GetMapping("/v1/getSezonyWithSpotkania")
+    public ResponseEntity<List<SezonyInfo>> wyswietlSpotkania() {
         return ResponseEntity.ok().body(service.wyswietlSpotkania());
     }
 
