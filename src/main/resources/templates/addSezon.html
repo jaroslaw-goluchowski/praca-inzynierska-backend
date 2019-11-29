@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dodawanie miast</title>
+    <title>Dodawanie sezonów</title>
     <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-<h1 class="blockquote text-center">Dodawanie miasta</h1>
+<h1 class="blockquote text-center">Dodawanie sezonu</h1>
 
 <div class="container">
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form action="#" th:action="@{/admin/addCity}" th:object="${miasto}" method="post">
+            <form action="#" th:action="@{/admin/addSezon}" method="post">
                 <fieldset>
-                    <div th:if="${miastoDodane}">
+                    <div th:if="${sezonDodany}">
                         <div class="alert alert-info">
-                            Miasto dodane!
-                        </div>
-                    </div>
-                    <div th:if="${miastoDodaneError}">
-                        <div class="alert alert-danger">
-                            Błąd!
+                            Sezon dodany!
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text"  class="form-control input-lg" th:field="*{nazwa}"
-                               placeholder="Nazwa miasta" required="true" autofocus="true"/>
+                        <input type="text" name="nazwa"  class="form-control input-lg"
+                               placeholder="Nazwa sezonu" required="true" autofocus="true"/>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">

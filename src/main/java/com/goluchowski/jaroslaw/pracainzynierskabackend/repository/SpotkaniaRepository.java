@@ -15,4 +15,6 @@ public interface SpotkaniaRepository extends JpaRepository<Spotkania, Long> {
     @Query(value = "SELECT * FROM spotkania s WHERE (s.gospodarz_id = :gospodarz_id OR s.gosc_id = :gosc_id) AND s.sezon_id = :sezon_id", nativeQuery = true)
     public List<Spotkania> findAllByGoscOrGospodarzAndSezon(Long gospodarz_id, Long gosc_id, Long sezon_id);
 
+    Spotkania findByGospodarzAndGosc(Druzyny gospodarz, Druzyny gosc);
+
 }

@@ -12,4 +12,6 @@ public interface SiatkarzeRepository extends JpaRepository<Siatkarze, Long> {
 
     public List<Siatkarze> findAllByDruzyna(Druzyny druzyna);
 
+    Siatkarze findByNazwisko(String nazwisko);
+
 }

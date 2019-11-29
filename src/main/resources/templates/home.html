@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>Plus Liga App - Panel Administracyjny</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -14,10 +14,15 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Spring Boot Web Thymeleaf + Spring Security</h1>
-        <h2>1. Visit <a th:href="@{/admin/addTrainer}">Adding trainer page</a></h2>
-        <h2>2. Visit <a th:href="@{/admin/addCity}">Adding city page</a></h2>
-        <h2>3. Visit <a th:href="@{/admin/addTeam}">Adding team page</a></h2>
+        <h1>Plus Liga App - Panel Administracyjny</h1>
+        <h2> <a th:href="@{/admin/addTrainer}">Dodawanie trenerów</a></h2>
+        <h2> <a th:href="@{/admin/addCity}">Dodawanie miast</a></h2>
+        <h2> <a th:href="@{/admin/addTeam}">Dodawanie drużyn</a></h2>
+        <h2> <a th:href="@{/admin/addSezon}">Dodawanie sezonów</a></h2>
+        <h2> <a th:href="@{/admin/addZawodnik}">Dodawanie zawodników</a></h2>
+        <h2> <a th:href="@{/admin/addSedzia}">Dodawanie sędziów</a></h2>
+        <h2> <a th:href="@{/admin/addPunkty}">Dodawanie punktów</a></h2>
+        <h2> <a th:href="@{/admin/addSpotkanie}">Dodawanie spotkań</a></h2>
     </div>
 
 </div>

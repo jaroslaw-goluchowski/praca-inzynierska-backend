@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dodawanie trenerów</title>
+    <title>Dodawanie zawodników</title>
     <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-        <h1 class="blockquote text-center"> Dodawanie trenera </h1>
+        <h1 class="blockquote text-center"> Dodawanie zawodnika </h1>
         <div class="container">
 
             <div class="row" style="margin-top:20px">
                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                    <form action="#" th:action="@{/admin/addTrainer}" th:object="${trener}" method="post">
+                    <form action="#" th:action="@{/admin/addZawodnik}" th:object="${zawodnik}" method="post">
                         <fieldset>
-                            <div th:if="${trenerDodany}">
+                            <div th:if="${zawodnikDodany}">
                                 <div class="alert alert-info">
-                                    Trener dodany!
-                                </div>
-                            </div>
-                            <div th:if="${param.trenerDodanyError}">
-                                <div class="alert alert-danger">
-                                    Błąd!
+                                    Zawodnik dodany!
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="text"  class="form-control input-lg" th:field="*{imie}"
-                                       placeholder="Imię trenera" required="true" autofocus="true"/>
+                                       placeholder="Imię zawodnika" required="true" autofocus="true"/>
                             </div>
                             <div class="form-group">
                                 <input type="text"  class="form-control input-lg" th:field="*{nazwisko}"
-                                       placeholder="Nazwisko trenera" required="true" autofocus="true"/>
+                                       placeholder="Nazwisko zawodnika" required="true" autofocus="true"/>
                             </div>
                             <div class="form-group">
                                 <input type="text"  class="form-control input-lg" th:field="*{data_urodzenia}"
                                        placeholder="Data urodzenia ( timestamp )" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="*{wzrost}"
+                                       placeholder="2.0" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="*{pozycja}"
+                                       placeholder="Pozycja zawodnika" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="nazwa_druzyny" class="form-control input-lg"
+                                       placeholder="Nazwa drużyny" required="true" autofocus="true"/>
                             </div>
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">

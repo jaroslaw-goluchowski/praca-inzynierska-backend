@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DruzynyRepository extends JpaRepository<Druzyny, Long> {
+    Druzyny findByNazwa(String nazwa);
 }

@@ -39,12 +39,10 @@ public class Spotkania {
 
     @ApiModelProperty(example = "3")
     @Column(name = "sety_gospodarze", length = 30)
-    @NotBlank(message = "sety_gospodarze is mandatory")
     private int sety_gospodarze;
 
     @ApiModelProperty(example = "2")
     @Column(name = "sety_goscie", length = 30)
-    @NotBlank(message = "sety_goscie is mandatory")
     private int sety_goscie;
 
     @ManyToOne(targetEntity = Sedziowie.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

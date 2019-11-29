@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SezonyRepository extends JpaRepository<Sezony, Long> {
+    Sezony findByNazwaSezonu(String nazwaSezonu);
 }

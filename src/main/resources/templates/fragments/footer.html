@@ -1,6 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
@@ -9,14 +8,7 @@
     <div class="container">
 
         <footer>
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: [[${#httpServletRequest.remoteUser}]] |
-                <form th:action="@{/logout}" method="post"> <input type="submit" value="Sign Out"/> </form>
-            </span>
-
-        <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+                | Zalogowany użytkownik: [[${#httpServletRequest.remoteUser}]] | <form th:action="@{/logout}" method="post"> <input type="submit" value="Wyloguj"/> </form>
         </footer>
     </div>
 
