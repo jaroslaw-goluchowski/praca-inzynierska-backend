@@ -31,19 +31,19 @@ public class HtmlController {
 
     @GetMapping("/admin/addTrainer")
     public String sendTrainerForm(@ModelAttribute("trener") Trenerzy trener) {
-        return "/admin/addTrainer";
+        return "/addTrainer";
     }
 
     @PostMapping("/admin/addTrainer")
     public String processTrainerForm(@ModelAttribute("trener") Trenerzy trener) {
         trenerzyRepository.save(trener);
-        return "/admin/showMessageTrainer";
+        return "/showMessageTrainer";
     }
 
     @GetMapping("/admin/addTeam")
     public String sendTeamForm(@ModelAttribute("druzyna") Druzyny druzyna,
                                @ModelAttribute("reszta") TrenerMiastoString reszta) {
-        return "/admin/addTeam";
+        return "/addTeam";
     }
 
     @PostMapping("/admin/addTeam")
@@ -56,38 +56,33 @@ public class HtmlController {
         druzyna.setMiasto(miasta);
         druzyna.setLogo(file.getBytes());
         druzynyRepository.save(druzyna);
-        return "/admin/showMessageTeam";
+        return "/showMessageTeam";
     }
 
     @GetMapping("/admin/addCity")
     public String sendCityForm(@ModelAttribute("miasto") Miasta miasto) {
-        return "/admin/addCity";
+        return "/addCity";
     }
 
     @PostMapping("/admin/addCity")
     public String processCityForm(@ModelAttribute("miasto") Miasta miasto) {
         miastaRepository.save(miasto);
-        return "/admin/showMessageCity";
+        return "/showMessageCity";
     }
 
     @GetMapping("/")
     public String home1() {
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/home")
     public String home() {
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String redirect() {
-        return "/admin/addTrainer";
+        return "/login";
     }
 
     @GetMapping("/403")

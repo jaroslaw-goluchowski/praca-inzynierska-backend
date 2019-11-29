@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adding teams</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+        <h1>Adding teams page </h1>
+        <div class="container">
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                    <form action="#" th:action="@{/admin/addTeam}" th:object="${druzyna}" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="${druzyna.nazwa}"
+                                placeholder="Nazwa druzyny" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="${druzyna.data_zalozenia}"
+                                       placeholder="Data zalożenia (timestamp)" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="file"  class="form-control input-lg"
+                                       placeholder="Logo" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="${reszta.nazwaMiasta}"
+                                       placeholder="Nazwa miasta" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control input-lg" th:field="${reszta.nazwiskoTrenera}"
+                                       placeholder="Nazwisko trenera" required="true" autofocus="true"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"/>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
+

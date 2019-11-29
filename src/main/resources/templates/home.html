@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
 
@@ -13,10 +14,10 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>PlusLiga App Admin Panel</h1>
-        <h2>1. Visit <a th:href="@{/admin/addTrainer}">Adding trainers page (Spring Security protected, Need Admin Role)</a></h2>
-        <h2>1. Visit <a th:href="@{/admin/addCity}">Adding cities page (Spring Security protected, Need Admin Role)</a></h2>
-        <h2>1. Visit <a th:href="@{/admin/addTeam}">Adding team page (Spring Security protected, Need Admin Role)</a></h2>
+        <h1>Spring Boot Web Thymeleaf + Spring Security</h1>
+        <h2>1. Visit <a th:href="@{/admin/addTrainer}">Adding trainer page</a></h2>
+        <h2>2. Visit <a th:href="@{/admin/addCity}">Adding city page</a></h2>
+        <h2>3. Visit <a th:href="@{/admin/addTeam}">Adding team page</a></h2>
     </div>
 
 </div>

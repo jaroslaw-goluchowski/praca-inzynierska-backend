@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -19,7 +21,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.anonymous().and()
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/about", "/v1/**", "/swagger-ui.html").permitAll()
+                    .antMatchers("/", "/home", "/about", "/v1/**", "/swagger-ui.html", "/resources/**", "/static/**","/admin/webjars/**", "/css/**", "/js/**", "/webjars/**", "webjars/**").permitAll()
                 .and()
                     .formLogin()
                     .loginPage("/login")
@@ -29,8 +31,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                     .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
-                .and().
-                    authorizeRequests().antMatchers("/resources/**", "/static/**","/webjars/**").permitAll()
                 .and()
                     .authorizeRequests()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")
@@ -39,9 +39,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**", "/static/**","/webjars/**","/css/**","/fonts/**","/libs/**","/v1/**");
+        web.ignoring().antMatchers("/js/**", "/webjars/**", "webjars/**", "/css/**");
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
